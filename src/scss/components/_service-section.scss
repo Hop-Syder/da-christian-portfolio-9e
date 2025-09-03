@@ -1,50 +1,61 @@
-.service{
+// === SECTION : SERVICE ===
+.service {
     position: relative;
     overflow: hidden;
     padding-bottom: 275px;
-    &__background{
+
+    &__background {
         position: absolute;
         top: 0;
         right: 0;
         z-index: -1;
         width: 61%;
-        svg{
+
+        svg {
             width: 100%;
             height: 100%;
         }
     }
-    &__background_shape{
+
+    &__background_shape {
         position: absolute;
         bottom: -10%;
         left: -7%;
         height: 465px;
         width: 410px;
-        svg{
-            width:100%;
+
+        svg {
+            width: 100%;
         }
-        @include desktop{
+
+        @include desktop {
             display: none;
         }
     }
-    &__background_pattern{
+
+    &__background_pattern {
         position: absolute;
         bottom: 4%;
         left: 6%;
         animation: move_top 5s infinite linear;
-        @include desktop{
+
+        @include desktop {
             display: none;
         }
     }
-    &__header{
+
+    &__header {
         margin-bottom: 50px;
-        span{
+
+        span {
             font-size: 20px;
             font-family: $secondary-font;
             color: $secondary-color;
             position: relative;
             display: block;
             margin: 0 0 20px 30px;
-            &::before{
+
+            &::before {
                 position: absolute;
                 content: '';
                 height: 2px;
@@ -55,17 +66,20 @@
                 background: $secondary-color;
             }
         }
-        h1{
+
+        h1 {
             margin: 0 0 30px 0;
             font-size: 50px;
             font-family: $primary-font;
             color: $secondary-color;
             line-height: 50px;
-            @include tablet{
+
+            @include tablet {
                 font-size: 39px;
             }
         }
-        p{
+
+        p {
             margin: 0 0 0 0;
             font-family: $secondary-font;
             color: $secondary-color;
@@ -73,36 +87,42 @@
             line-height: 26px;
         }
     }
-    &__slider{
-        &_item{
+
+    &__slider {
+        &_item {
             margin: 15px;
             padding: 30px;
-            box-shadow: 0px 20px 40px 0px rgba(50,65,141,0.12);
+            box-shadow: 0px 20px 40px 0px rgba(50, 65, 141, 0.12);
             border-radius: 20px;
             background: $white;
-            &-icon{
+
+            &-icon {
                 height: 110px;
                 width: 125px;
                 position: relative;
-                .icon-background{
+
+                .icon-background {
                     position: absolute;
                     top: 0;
                     right: 0;
                 }
-                .icon{
+
+                .icon {
                     position: absolute;
                     left: 0;
                     bottom: 0;
                     z-index: 1;
                 }
             }
-            h4{
+
+            h4 {
                 font-size: 24px;
                 font-family: $primary-font;
                 color: $secondary-color;
                 margin: 40px 0 30px 0;
             }
-            p{
+
+            p {
                 font-family: $secondary-font;
                 color: #7E7E8A;
                 font-size: 16px;
@@ -110,24 +130,29 @@
                 margin: 0;
             }
         }
+
         .slick-list {
             overflow: visible;
         }
-        .slick-dots{
+
+        .slick-dots {
             display: flex;
             align-items: center;
             margin: 0;
             padding: 0;
             justify-content: center;
-            li{
+
+            li {
                 margin: 0;
                 list-style: none;
                 height: 8px;
                 width: 8px;
-                &:not(:last-child){
+
+                &:not(:last-child) {
                     margin-right: 15px;
                 }
-                button{
+
+                button {
                     cursor: pointer;
                     height: 100%;
                     width: 100%;
@@ -137,27 +162,242 @@
                     display: block;
                     padding: 0;
                     text-indent: -9999px;
+
                     &:focus {
                         outline: 0;
                     }
-                    &:hover{
+
+                    &:hover {
                         background: $primary-color;
                     }
                 }
-                &.slick-active{
+
+                &.slick-active {
                     height: 10px;
                     width: 10px;
                     border-radius: 50%;
-                    button{
+
+                    button {
                         background-color: $primary-color;
                     }
                 }
             }
         }
+
         .slick-slide {
-            &:focus{
+            &:focus {
                 outline: 0;
             }
+        }
+    }
+}
+
+
+
+/* Fonts */
+$primary-font: 'Yeseva One', cursive;
+$secondary-font: 'Poppins', sans-serif;
+
+// === SECTION : PACKS DE SITES WEB ===
+.web-packs {
+    padding: 100px 0;
+    background-color: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+
+    // Titre principal
+    h2,
+    h3 {
+        @extend .service__header;
+        margin: 0 0 30px 0;
+        text-align: center;
+        font-family: $primary-font; // Yeseva One pour titres
+
+    }
+
+    h4 {
+        font-family: $secondary-font; // Yeseva One pour titres
+    }
+
+    // Paragraphe intro
+    p.lead {
+        @extend .service__header;
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 50px;
+        font-family: $secondary-font; // Poppins pour tout le reste
+    }
+
+    // Carte de pack
+    .pack-card {
+        background: $white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        &.highlight {
+            border: 2px solid $primary-color;
+            position: relative;
+            z-index: 1;
+        }
+
+        &-header {
+            padding: 20px;
+            text-align: center;
+            background: #f1f6f9;
+            border-bottom: 1px solid #eee;
+
+            h4 {
+                @extend .service__slider_item;
+                margin: 0 0 8px 0;
+            }
+
+            .pack-price {
+                font-weight: bold;
+                font-family: $secondary-font;
+                color: $secondary-color;
+                font-size: 20px;
+            }
+        }
+
+        &-body {
+            padding: 25px;
+            flex: 1;
+
+            .ideal {
+                margin-bottom: 15px;
+                font-weight: 500;
+                font-family: $secondary-font;
+                color: #e67e22;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    margin-bottom: 10px;
+                    position: relative;
+                    padding-left: 20px;
+                    font-family: $secondary-font;
+
+                    &::before {
+                        content: "•";
+                        color: $primary-color;
+                        font-weight: bold;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                    }
+                }
+            }
+        }
+    }
+
+
+    /* === BOUTON DEVIS GÉNÉRAL === */
+    .cta-devis-btn {
+        background: $primary-color;
+        color: $white;
+        padding: 16px 40px;
+        font-size: 18px;
+        font-family: $secondary-font;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-block;
+
+        &:hover {
+            background: darken($primary-color, 8%);
+            color: $white;
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+    }
+
+    /* === BOUTON DE CHAQUE PACK === */
+    .pack-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 25px;
+        background: $primary-color;
+        color: $white;
+        font-family: $secondary-font; // 🔥 Correction ici
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+        width: 100%;
+        border: 1px solid transparent;
+
+        &:hover {
+            background: $white;
+            color: $primary-color;
+            border: 1px solid $primary-color;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 176, 7, 0.2);
+        }
+    }
+
+    // Bloc "Tous nos packs incluent"
+    .pack-includes {
+        margin-top: 40px;
+        padding: 20px;
+        background: #e8f5fd;
+        border-radius: 10px;
+        width: 100%;
+
+        h5 {
+            @extend .service__header;
+            color: $secondary-color;
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+
+        .includes-list {
+            @extend .service__header;
+            margin: 0;
+            text-align: center;
+            color: #555;
+        }
+    }
+
+    // Responsive
+    @include desktop {
+        padding: 80px 0;
+
+        .pack-card {
+            margin-bottom: 20px;
+        }
+    }
+
+    @include tablet {
+        .includes-list {
+            font-size: 0.95em;
+        }
+
+        .pack-card-body ul li {
+            padding-left: 18px;
+        }
+    }
+
+    @include mobile {
+        padding: 60px 0;
+
+        .pack-card {
+            margin: 0 auto 20px;
+            max-width: 400px;
         }
     }
 }

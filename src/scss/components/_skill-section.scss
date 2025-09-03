@@ -1,63 +1,78 @@
-.skill{
+.skill {
     position: relative;
     padding: 100px 0 150px 0;
-    @include desktop{
+
+    @include desktop {
         padding: 100px 0;
     }
-    &__background_shape{
+
+    &__background_shape {
         position: absolute;
         bottom: 2%;
         right: 2%;
         height: 300px;
         width: 300px;
-        svg{
+
+        svg {
             width: 100%;
         }
-        @include desktop{
+
+        @include desktop {
             display: none;
         }
     }
-    &__background_pattern{
+
+    &__background_pattern {
         position: absolute;
         bottom: 5%;
         right: 10%;
         height: 100px;
         width: 100px;
         animation: move_top 3s infinite linear;
-        img{
+
+        img {
             height: 100%;
             width: 100%;
         }
-        @include desktop{
+
+        @include desktop {
             display: none;
         }
     }
-    &__thumb{
+
+    &__thumb {
         position: relative;
-        @include tablet{
+
+        @include tablet {
             margin-bottom: 30px;
         }
-        &_pattern{
+
+        &_pattern {
             position: absolute;
             top: -11%;
             left: -17%;
             z-index: -1;
             height: 150px;
             animation: move_top 4s infinite linear;
-            img{
+
+            img {
                 height: 100%;
                 width: 100%;
             }
         }
-        &_image{
+
+        &_image {
             margin-right: 7%;
-            @include desktop{
+
+            @include desktop {
                 margin-right: 0;
             }
-            img{
+
+            img {
                 height: 100%;
                 width: 100%;
-                &.skill_mask_svg{
+
+                &.skill_mask_svg {
                     mask: url(../images/skill/skill-mask-svg.svg);
                     -webkit-mask-repeat: no-repeat;
                     -webkit-mask-size: contain;
@@ -66,22 +81,27 @@
             }
         }
     }
-    &__progress{
+
+    &__progress {
         margin-left: 40px;
-        @include desktop{
+
+        @include desktop {
             margin-left: 0;
             margin-top: 30px;
         }
-        &_heading{
+
+        &_heading {
             margin-bottom: 40px;
-            span{
+
+            span {
                 font-size: 20px;
                 font-family: $secondary-font;
                 color: $secondary-color;
                 position: relative;
                 display: block;
                 margin: 0 0 20px 30px;
-                &::before{
+
+                &::before {
                     position: absolute;
                     content: '';
                     height: 2px;
@@ -92,14 +112,16 @@
                     background: $secondary-color;
                 }
             }
-            h1{
+
+            h1 {
                 margin: 0 0 30px 0;
-                font-size: 50px;
+                font-size: 40px;
                 font-family: $primary-font;
                 color: $secondary-color;
                 line-height: 50px;
             }
-            p{
+
+            p {
                 margin: 0 0 0 0;
                 font-family: $secondary-font;
                 color: $secondary-color;
@@ -107,15 +129,18 @@
                 line-height: 26px;
             }
         }
-        &_item{
-            &.js-animation{
+
+        &_item {
+            &.js-animation {
                 transition: all .3s ease;
-                .progress{
+
+                .progress {
                     width: 100%;
                     background: #E7EEF2;
                     height: 10px;
                     border-radius: 5px;
-                    .progress-bar{
+
+                    .progress-bar {
                         border-radius: 5px;
                         position: relative;
                         animation: animate-positive 3000ms;
@@ -123,16 +148,19 @@
                     }
                 }
             }
-            &:not(:last-child){
+
+            &:not(:last-child) {
                 margin-bottom: 30px;
             }
-            h6{
+
+            h6 {
                 display: inline-block;
                 font-family: $secondary-font;
                 font-weight: 400;
                 font-size: 16px;
             }
-            .progress-value{
+
+            .progress-value {
                 float: right;
                 font-family: $secondary-font;
                 font-size: 16px;
@@ -141,6 +169,153 @@
         }
     }
 }
-@keyframes animate-positive{
-    0%{ width: 0; }
+
+/* === BOUTON "VOIR PLUS" DANS CERTIFICATIONS === */
+.btn-more {
+    display: inline-block;
+    padding: 14px 30px;
+    background: #ffb007;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 176, 7, 0.2);
+}
+
+.btn-more:hover {
+    background: #fff;
+    color: #ffb007;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 176, 7, 0.3);
+    border: 2px solid #ffb007;
+}
+
+@keyframes animate-positive {
+    0% {
+        width: 0;
+    }
+}
+
+/* === CERTIFICATIONS SECTION === */
+.certifications {
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.certifications .container {
+    position: relative;
+    z-index: 2;
+}
+
+.certifications h1,
+.certifications span {
+    text-align: center;
+}
+
+.certifications p {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #7E7E8A;
+}
+
+/* Grille de certifications */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.cert-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.cert-item:hover {
+    transform: translateY(-10px);
+    opacity: 1;
+}
+
+.cert-item-inner {
+    width: 100%;
+    height: 180px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.cert-item-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.cert-item:hover .cert-item-inner {
+    box-shadow: 0 20px 40px rgba(255, 176, 7, 0.2);
+    border-color: #ffb007;
+}
+
+/* Info sous l'image */
+.cert-info {
+    margin-top: 12px;
+}
+
+.cert-info h5 {
+    font-family: 'Yeseva One', cursive;
+    font-weight: 600;
+    color: #282F49;
+    font-size: 16px;
+    margin: 8px 0 4px;
+}
+
+.cert-info p {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #7E7E8A;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .certifications {
+        padding: 80px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .certifications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .cert-item-inner {
+        height: 150px;
+    }
+}
+
+@media (max-width: 575px) {
+    .certifications {
+        padding: 60px 0;
+    }
+
+    .cert-item {
+        text-align: center;
+    }
 }

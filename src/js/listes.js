@@ -1,3 +1,8 @@
+// ════════════════════════════════════════════════════════
+// @hopsyder | Gestion dynamique des articles de blog
+// Nexus Partners - Blog Loader
+// ════════════════════════════════════════════════════════
+
 // Liste des articles (id, titre, fichier, breadcrumb)
 const articles = [
     {
@@ -71,13 +76,14 @@ const articles = [
 // Fonction pour obtenir l'id d'article depuis l'URL (?article=...)
 function getArticleIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('article') || articles[0].id;
+    return params.get('article') || articles[0].id; // fallback : premier article
 }
 
-// Fonction pour charger dynamiquement le breadcrumb
+// Charger dynamiquement le breadcrumb
 function loadBreadcrumb() {
     const articleId = getArticleIdFromUrl();
     const article = articles.find(a => a.id === articleId) || articles[0];
+
     document.getElementById('breadcrumb-container').innerHTML = `
     <header class="breadCrumb">
       <div class="container">
@@ -98,33 +104,60 @@ function loadBreadcrumb() {
     `;
 }
 
+// Charger dynamiquement le contenu de l’article
+function loadArticleContent() {
+    const articleId = getArticleIdFromUrl();
+    const article = articles.find(a => a.id === articleId) || articles[0];
+
+    fetch(`partials/components/articles/${article.file}`)
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('article-content').innerHTML = data;
+        })
+        .catch(err => {
+            console.error("Erreur de chargement:", err);
+            document.getElementById('article-content').innerHTML = "<p>Erreur de chargement de l’article.</p>";
+        });
+}
+
+// Charger titre général (utile si tu veux une page blog.html avec des catégories)
 function loadPageTitle() {
-    // Exemple : récupération d'un paramètre de catégorie dans l'URL
     const params = new URLSearchParams(window.location.search);
     const categorie = params.get('categorie');
     let title = "Articles récents";
     let breadcrumb = "Tous les articles";
+
     if (categorie) {
         title = "Articles de la catégorie : " + categorie;
         breadcrumb = categorie;
     }
-    document.getElementById('page-title-container').innerHTML = `
-        <section class="page-title">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>${title}</h1>
-                        <ul class="breadcrumb__list">
-                            <li><a href="index.html">Accueil</a></li>
-                            <li>${breadcrumb}</li>
-                        </ul>
+
+    if (document.getElementById('page-title-container')) {
+        document.getElementById('page-title-container').innerHTML = `
+            <section class="page-title">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1>${title}</h1>
+                            <ul class="breadcrumb__list">
+                                <li><a href="index.html">Accueil</a></li>
+                                <li>${breadcrumb}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    `;
+            </section>
+        `;
+    }
 }
 
-window.addEventListener('DOMContentLoaded', loadBreadcrumb);
-window.addEventListener('DOMContentLoaded', loadPageTitle);
-
+// Initialisation
+window.addEventListener('DOMContentLoaded', () => {
+    loadBreadcrumb();
+    loadArticleContent();
+    loadPageTitle();
+});
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+// @hopsyder | Gestion du chargement des articles de blog
+// Nexus Partners - Blog Loader
+// ════════════════════════════════════════════════════════
