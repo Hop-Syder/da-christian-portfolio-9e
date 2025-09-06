@@ -102,8 +102,15 @@ const others = () =>
   src(path.src.others).pipe(dest(path.build.dir)).pipe(bs.reload({ stream: true }));
 
 // Copier les fichiers articles
-const articles = () =>
-  src(path.src.articles).pipe(dest(path.build.dir + "partials/articles/")).pipe(bs.reload({ stream: true }));
+const articles = () => {
+  console.log('Copie des articles depuis', path.src.articles, 'vers', path.build.dir + 'partials/articles/');
+  return src(path.src.articles)
+    .pipe(dest(path.build.dir + "partials/articles/"))
+    .on('end', () => {
+      console.log('Copie des articles terminée.');
+    })
+    .pipe(bs.reload({ stream: true }));
+};
 
 // Watch task
 const watchTask = () => {
