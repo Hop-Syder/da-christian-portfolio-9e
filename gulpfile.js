@@ -17,6 +17,7 @@ const path = {
     others: "src/*.+(php|ico|png)",
     htminc: "src/partials/**/*.htm",
     incdir: "src/partials/",
+    articles: "src/partials/articles/**/*.htm", // <-- ajout
     vendor: "src/vendor/**/*.*",
     fonts: "src/fonts/**/*.*",
     js: "src/js/*.js",
@@ -38,7 +39,6 @@ const clean = (cb) => {
 const customPlumber = (errTitle) => {
   return plumber({
     errorHandler: notify.onError({
-      // Customizing error title
       title: errTitle || "Error running Gulp",
       message: "Error: <%= error.message %>",
       sound: "Glass",
@@ -46,7 +46,7 @@ const customPlumber = (errTitle) => {
   });
 };
 
-// HTML Task: Generate HTML files with partials
+// HTML Task
 const html = () =>
   src(path.src.html)
     .pipe(customPlumber("Error Running html-include"))
@@ -56,13 +56,9 @@ const html = () =>
       })
     )
     .pipe(dest(path.build.dir))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
+    .pipe(bs.reload({ stream: true }));
 
-// SCSS Task: Generate Css files from .scss files
+// SCSS Task
 const scss = () =>
   src(path.src.scss)
     .pipe(customPlumber("Error Running Sass"))
@@ -71,11 +67,7 @@ const scss = () =>
     .pipe(autoprefixer())
     .pipe(sourcemaps.write("/maps"))
     .pipe(dest(path.build.dir + "css/"))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
+    .pipe(bs.reload({ stream: true }));
 
 const scssDev = () =>
   src(path.src.scss)
@@ -86,59 +78,32 @@ const scssDev = () =>
     .pipe(autoprefixer())
     .pipe(sourcemaps.write("/maps"))
     .pipe(dest(path.build.dir + "css/"))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
-// Javascript task: generate theme script files
+    .pipe(bs.reload({ stream: true }));
+
+// JS Task
 const js = () =>
   src(path.src.js)
     .pipe(customPlumber("Error Running JS"))
     .pipe(uglify())
     .pipe(dest(path.build.dir + "js/"))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
+    .pipe(bs.reload({ stream: true }));
 
-// Assets Tasks: copy assets(images,vendor,fonts etc) from source to destination
+// Assets
 const images = () =>
-  src(path.src.images)
-    .pipe(dest(path.build.dir + "images/"))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
+  src(path.src.images).pipe(dest(path.build.dir + "images/")).pipe(bs.reload({ stream: true }));
 
 const vendor = () =>
-  src(path.src.vendor)
-    .pipe(dest(path.build.dir + "vendor/"))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
+  src(path.src.vendor).pipe(dest(path.build.dir + "vendor/")).pipe(bs.reload({ stream: true }));
 
 const fonts = () =>
-  src(path.src.fonts)
-    .pipe(dest(path.build.dir + "fonts/"))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
+  src(path.src.fonts).pipe(dest(path.build.dir + "fonts/")).pipe(bs.reload({ stream: true }));
 
 const others = () =>
-  src(path.src.others)
-    .pipe(dest(path.build.dir))
-    .pipe(
-      bs.reload({
-        stream: true,
-      })
-    );
+  src(path.src.others).pipe(dest(path.build.dir)).pipe(bs.reload({ stream: true }));
+
+// Copier les fichiers articles
+const articles = () =>
+  src(path.src.articles).pipe(dest(path.build.dir + "partials/articles/")).pipe(bs.reload({ stream: true }));
 
 // Watch task
 const watchTask = () => {
@@ -149,19 +114,21 @@ const watchTask = () => {
   watch(path.src.vendor, series(vendor));
   watch(path.src.fonts, series(fonts));
   watch(path.src.others, series(others));
+  watch(path.src.articles, series(articles));
 };
 
+// Default & Dev
 exports.default = series(
   clean,
   html,
   parallel(scssDev, js),
-  parallel(images, vendor, fonts, others)
+  parallel(images, vendor, fonts, others, articles)
 );
 
 exports.dev = series(
   html,
   parallel(scss, js),
-  parallel(images, vendor, fonts, others),
+  parallel(images, vendor, fonts, others, articles),
   parallel(watchTask, function () {
     bs.init({
       server: {

@@ -109,7 +109,7 @@ function loadArticleContent() {
     const articleId = getArticleIdFromUrl();
     const article = articles.find(a => a.id === articleId) || articles[0];
 
-    fetch(`partials/components/articles/${article.file}`)
+    fetch(`partials/articles/${article.file}`)
         .then(res => res.text())
         .then(data => {
             document.getElementById('article-content').innerHTML = data;
