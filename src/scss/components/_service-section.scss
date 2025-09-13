@@ -69,7 +69,7 @@
 
         h1 {
             margin: 0 0 30px 0;
-            font-size: 50px;
+            font-size: 45px;
             font-family: $primary-font;
             color: $secondary-color;
             line-height: 50px;
@@ -244,8 +244,14 @@ $secondary-font: 'Poppins', sans-serif;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
         }
 
+        &.highlight2 {
+            border: 2px solid $secondary-color;
+            position: relative;
+            z-index: 1;
+        }
+
         &.highlight {
-            border: 2px solid $primary-color;
+            border: 5px solid $primary-color;
             position: relative;
             z-index: 1;
         }

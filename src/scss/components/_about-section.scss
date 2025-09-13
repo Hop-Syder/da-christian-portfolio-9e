@@ -1,23 +1,27 @@
-.about{
-    @include desktop-xl{
+.about {
+    @include desktop-xl {
         overflow: hidden;
     }
-    &_header{
+
+    &_header {
         margin-bottom: 60px;
-        span{
+
+        span {
             display: block;
             font-size: 20px;
             font-family: $secondary-font;
             margin: 0 0 30px 0;
         }
-        h1{
+
+        h1 {
             margin: 0 0 20px 0;
-            font-size: 55px;
+            font-size: 40px;
             font-family: $primary-font;
             color: $secondary-color;
             line-height: 1;
         }
-        p{
+
+        p {
             margin: 0;
             font-size: 18px;
             font-family: $secondary-font;
@@ -25,38 +29,46 @@
             line-height: 30px;
         }
     }
-    &_content{
+
+    &_content {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        &-thumb{
+
+        &-thumb {
             width: 45%;
             position: relative;
-            @include desktop{
+
+            @include desktop {
                 width: 100%;
             }
-            .about-svg{
+
+            .about-svg {
                 position: absolute;
                 top: -11%;
                 left: -17%;
                 z-index: -1;
                 height: 150px;
                 animation: move_top 4s infinite;
-                @include tablet{
+
+                @include tablet {
                     top: -7%;
                     left: -16%;
                 }
-                img{
+
+                img {
                     height: 100%;
                     width: 100%;
                 }
             }
-            .about_content-thumb-image{
-                img{
+
+            .about_content-thumb-image {
+                img {
                     height: 100%;
                     width: 100%;
-                    &.about_mask_svg{
+
+                    &.about_mask_svg {
                         mask: url(../images/about/about-mask-svg.svg);
                         -webkit-mask-repeat: no-repeat;
                         -webkit-mask-size: contain;
@@ -65,62 +77,75 @@
                 }
             }
         }
-        &-inner{
+
+        &-inner {
             width: 55%;
             padding: 60px 50px;
             background: #1B2031;
             border-radius: 20px;
             margin-left: -60px;
             position: relative;
-            @include desktop{
+
+            @include desktop {
                 padding: 25px;
             }
-            @include desktop{
+
+            @include desktop {
                 width: 100%;
                 margin-left: 0;
                 margin-top: 30px;
             }
-            &-blob{
+
+            &-blob {
                 position: absolute;
                 top: -55%;
                 right: -22%;
                 z-index: -1;
                 width: 400.369px;
                 height: 362.909px;
-                svg{
+
+                svg {
                     width: 140%;
                 }
-                @media (min-width:1400px) and (max-width:1600px){
+
+                @media (min-width:1400px) and (max-width:1600px) {
                     right: -12%;
                 }
-                @include tablet{
+
+                @include tablet {
                     display: none;
                 }
             }
-            h3{
+
+            h3 {
                 margin: 0 0 35px 0;
                 color: $white;
                 font-family: $primary-font;
             }
-            p{
+
+            p {
                 margin: 0 0 35px 0;
                 font-size: 15px;
                 font-family: $secondary-font;
                 color: $white;
                 font-weight: 400;
                 line-height: 30px;
-                @include desktop{
+
+                @include desktop {
                     font-size: 14px;
                     line-height: 26px;
                 }
             }
-            ul{
+
+            ul {
                 margin: 0;
                 padding: 0;
-                li{
+
+                li {
                     list-style: none;
                     display: inline-block;
-                    a{
+
+                    a {
                         display: block;
                         padding: 15px 30px;
                         text-decoration: none;
@@ -129,20 +154,24 @@
                         transition: all .3s ease;
                         border: 1px solid #60636F;
                         background: transparent;
-                        &.active{
+
+                        &.active {
                             background-color: $primary-color;
                             border: 1px solid transparent;
                         }
-                        &:hover{
+
+                        &:hover {
                             border: 1px solid #425FEE;
                             background: #425FEE;
                             box-shadow: 0 8px 20px rgba(56, 87, 241, 0.3);
                             transform: scale(1.03);
                         }
                     }
-                    &:not(:last-child){
+
+                    &:not(:last-child) {
                         margin-right: 10px;
-                        @include mobile-s{
+
+                        @include mobile-s {
                             margin-bottom: 10px;
                         }
                     }
